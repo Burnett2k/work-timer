@@ -12,10 +12,12 @@ const PORT=8080;
 //misc variables
 var logging = true;
 
+app.set('view engine', 'pug');
+
 app.listen(PORT);
 
 app.get('/', function (req, res) {
-  res.send('GET request to the homepage')
+  res.render('index');
 })
 
 function handleResponse(error, response, body) {
