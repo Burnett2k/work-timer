@@ -1,0 +1,24 @@
+{
+  "name": "work-timer",
+  "version": "1.0.0",
+  "description": "simple timer to track pomodoro sessions throughout the day and also interruptions",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Burnett2k/work-timer.git"
+  },
+  "author": "Sawyer Burnett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Burnett2k/work-timer/issues"
+  },
+  "homepage": "https://github.com/Burnett2k/work-timer#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "request": "^2.83.0"
+  }
+}
