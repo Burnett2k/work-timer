@@ -7,7 +7,8 @@
  		if (interval) {
  			clearInterval(interval);
  		}
-	 	var duration = 60 * 5;
+
+	 	var duration = $('#minutes').val() * 60;
 	 	var display = $('#timer');
 	 	startTimer(duration, display);
  	});
