@@ -1,6 +1,12 @@
  $(document).ready(function() {
 
+ 	var interval;
+
  	$('#start').click(function() {
+
+ 		if (interval) {
+ 			clearInterval(interval);
+ 		}
 	 	var duration = 60 * 5;
 	 	var display = $('#timer');
 	 	startTimer(duration, display);
@@ -32,7 +38,7 @@
  		};
 
  		timer();
-		setInterval(timer, 1000); 		
+		interval = setInterval(timer, 1000); 		
 
 		// setInterval(function() {
 		//     $('#timer').text((new Date - start) / 1000 + " Seconds");
