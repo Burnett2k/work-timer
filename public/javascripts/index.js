@@ -15,10 +15,7 @@
  	});
 
  	$('#stop').click(function() {
- 		display.text("00:00");
- 		if (interval) {
- 			clearInterval(interval);
- 		}
+ 		stopTimer();
  	});
 
  	function startTimer(duration, display) {
@@ -54,4 +51,10 @@
 		// }, 1000);
 
  	}
+ 	function stopTimer() {
+ 		display.text("00:00");
+ 		if (interval) {
+ 			clearInterval(interval);
+ 		}
+ 	};
  });
