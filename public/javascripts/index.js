@@ -1,6 +1,7 @@
  $(document).ready(function() {
 
  	var interval;
+	var display = $('#timer');
 
  	$('#start').click(function() {
 
@@ -9,8 +10,15 @@
  		}
 
 	 	var duration = $('#minutes').val() * 60;
-	 	var display = $('#timer');
+
 	 	startTimer(duration, display);
+ 	});
+
+ 	$('#stop').click(function() {
+ 		display.text("00:00");
+ 		if (interval) {
+ 			clearInterval(interval);
+ 		}
  	});
 
  	function startTimer(duration, display) {
