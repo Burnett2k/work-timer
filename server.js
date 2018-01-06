@@ -4,6 +4,7 @@ var http = require('http');
 var request = require('request');
 var fs = require('fs');
 var express = require('express');
+var path = require('path');
 var app = express();
 
 //constants
@@ -13,6 +14,7 @@ const PORT=8080;
 var logging = true;
 
 app.set('view engine', 'pug');
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(PORT);
 
