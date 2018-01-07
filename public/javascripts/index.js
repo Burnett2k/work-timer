@@ -4,6 +4,7 @@
 	var display = $('#timer');
 	var title = $('#title');
 	var tick = document.getElementById("tick");
+	var timesUp = document.getElementById("timesUp");
 	var mute = false;
 
  	$('#start').click(function() {
@@ -46,13 +47,14 @@
 
  			updateClockText(minutes + ":" + seconds);
 
- 			playTimerTickSound();
-
  			if (minutes === "00" && seconds === "00") {
  				clearInterval(interval);
+ 				playTimerEndSound();
  				return;
  			}
- 			
+
+ 			playTimerTickSound();
+
  			if (diff <= 0) {
  				start = Date.now() + 1000;
  			}
@@ -62,27 +64,31 @@
  		timer();
 		interval = setInterval(timer, 1000); 		
 
- 	}
+ 	};
+
  	function updateClockText(text) {
 		display.text(text);
 		document.title = "(" + text + ") work timer";
- 	}
+ 	};
+
  	function stopTimer() {
  		updateClockText("00:00");
  		if (interval) {
  			clearInterval(interval);
  		}
  	};
+
  	function resetTimer(duration, display) {
  		clearInterval(interval);
  		updateClockText($('#minutes').val() + ":00");
- 	}
+ 	};
 
  	function playTimerEndSound() {
  		if (!mute) {
-
+ 			timesUp.play();
  		}
  	};
+ 	
  	function playTimerTickSound() {
  		if (!mute) {
 	 		tick.play();
