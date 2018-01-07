@@ -2,6 +2,7 @@
 
  	var interval;
 	var display = $('#timer');
+	var tick = document.getElementById("tick");
 
  	$('#start').click(function() {
 
@@ -36,7 +37,13 @@
  			seconds = seconds < 10 ? "0" + seconds : seconds;
 
  			display.text(minutes + ":" + seconds);
+ 			playTimerTickSound();
 
+ 			if (minutes === "00" && seconds === "00") {
+ 				clearInterval(interval);
+ 				return;
+ 			}
+ 			
  			if (diff <= 0) {
  				start = Date.now() + 1000;
  			}
@@ -56,5 +63,12 @@
  		if (interval) {
  			clearInterval(interval);
  		}
+ 	};
+
+ 	function playTimerEndSound() {
+
+ 	};
+ 	function playTimerTickSound() {
+ 		tick.play();
  	};
  });
