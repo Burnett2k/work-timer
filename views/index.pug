@@ -1,12 +1,14 @@
 html
   head
-    title work timer
+    title#title work timer
   body
     h1 we all stars now
     input#minutes(type='number', name='minutes', min='1', max='30')
     button#start start
     button#stop stop
     button#reset reset
+    input#mute(type='checkbox', name='agreement', unchecked)
+    label(for='mute') mute?
     h2#timer 00:00
     audio#tick
       source(src='/sounds/tick.mp3')

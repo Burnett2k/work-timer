@@ -4,6 +4,7 @@
 	var display = $('#timer');
 	var title = $('#title');
 	var tick = document.getElementById("tick");
+	var mute = false;
 
  	$('#start').click(function() {
 
@@ -23,6 +24,10 @@
  	$('#reset').click(function() {
 	 	var duration = $('#minutes').val() * 60;
  		resetTimer(duration, display);
+ 	})
+
+ 	$('#mute').change(function() {
+ 		mute = !mute;
  	})
 
  	function startTimer(duration, display) {
@@ -74,9 +79,13 @@
  	}
 
  	function playTimerEndSound() {
+ 		if (!mute) {
 
+ 		}
  	};
  	function playTimerTickSound() {
- 		tick.play();
+ 		if (!mute) {
+	 		tick.play();
+ 		}
  	};
  });
