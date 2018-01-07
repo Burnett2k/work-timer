@@ -2,6 +2,7 @@
 
  	var interval;
 	var display = $('#timer');
+	var title = $('#title');
 	var tick = document.getElementById("tick");
 
  	$('#start').click(function() {
@@ -33,15 +34,13 @@
 
  		function timer() {
  			diff = duration - (((Date.now() - start) / 1000) | 0);
-
-
  			minutes = (diff / 60) | 0;
  			seconds = (diff % 60) | 0;
-
  			minutes = minutes < 10 ? "0" + minutes : minutes;
  			seconds = seconds < 10 ? "0" + seconds : seconds;
 
- 			display.text(minutes + ":" + seconds);
+ 			updateClockText(minutes + ":" + seconds);
+
  			playTimerTickSound();
 
  			if (minutes === "00" && seconds === "00") {
@@ -59,15 +58,19 @@
 		interval = setInterval(timer, 1000); 		
 
  	}
+ 	function updateClockText(text) {
+		display.text(text);
+		document.title = "(" + text + ") work timer";
+ 	}
  	function stopTimer() {
- 		display.text("00:00");
+ 		updateClockText("00:00");
  		if (interval) {
  			clearInterval(interval);
  		}
  	};
  	function resetTimer(duration, display) {
  		clearInterval(interval);
- 		display.text($('#minutes').val() + ":00");
+ 		updateClockText($('#minutes').val() + ":00");
  	}
 
  	function playTimerEndSound() {
