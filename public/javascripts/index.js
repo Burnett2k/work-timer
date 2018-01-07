@@ -19,6 +19,11 @@
  		stopTimer();
  	});
 
+ 	$('#reset').click(function() {
+	 	var duration = $('#minutes').val() * 60;
+ 		resetTimer(duration, display);
+ 	})
+
  	function startTimer(duration, display) {
 
  		var start = Date.now()
@@ -53,10 +58,6 @@
  		timer();
 		interval = setInterval(timer, 1000); 		
 
-		// setInterval(function() {
-		//     $('#timer').text((new Date - start) / 1000 + " Seconds");
-		// }, 1000);
-
  	}
  	function stopTimer() {
  		display.text("00:00");
@@ -64,6 +65,10 @@
  			clearInterval(interval);
  		}
  	};
+ 	function resetTimer(duration, display) {
+ 		clearInterval(interval);
+ 		display.text($('#minutes').val() + ":00");
+ 	}
 
  	function playTimerEndSound() {
 
