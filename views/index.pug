@@ -2,18 +2,22 @@ html
   head
     title#title work timer
   body
-    h1 we all stars now
-    input#minutes(type='number', name='minutes', min='1', max='30')
-    button#start start
-    button#stop stop
-    button#reset reset
-    input#mute(type='checkbox', name='agreement', unchecked)
-    label(for='mute') mute?
-    h2#timer 00:00
-    audio#tick
-      source(src='/sounds/tick.mp3')
-    audio#timesUp
-      source(src='/sounds/timesup.mp3')
+    div(class='containter text-center')
+      div(class='jumbotron')
+        h1(class='display-3') MODERN HIPSTER TIMER
+        input#minutes(type='number', name='minutes', min='1', max='30')
+        div(class='text-center')
+          button(id='start', class='btn btn-lg') start
+          button(id='stop', class='btn btn-lg') stop
+          button(id='reset', class='btn btn-lg') reset
+          div(class='form-check')
+            input(id='mute', class='form-check-input', type='checkbox', name='agreement', unchecked)
+            label(for='mute', class='form-check-label') mute?
+        h2#timer 00:00
+      audio#tick
+        source(src='/sounds/tick.mp3')
+      audio#timesUp
+        source(src='/sounds/timesup.mp3')
   script(src='https://code.jquery.com/jquery-3.2.1.js')
   script(src='/javascripts/index.js')
   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css', integrity='sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy', crossorigin='anonymous')
