@@ -5,7 +5,7 @@
 	var title = $('#title');
 	var tick = document.getElementById("tick");
 	var timesUp = document.getElementById("timesUp");
-	var mute = false;
+	var mute = true;
 
  	$('#start').click(function() {
 
