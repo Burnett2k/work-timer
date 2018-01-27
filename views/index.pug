@@ -3,10 +3,12 @@ html
 		title#title Pomodoro Timer
 		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
 		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css', integrity='sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy', crossorigin='anonymous')
+		link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet", integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN", crossorigin="anonymous")
 	body
-		div(class='jumbotron text-center')
-			div(class="d-flex flex-row-reverse")
-				button(type='button', class='btn btn-primary', data-toggle='modal' data-target='#settingsModal') settings	
+		div(class="d-flex flex-row-reverse")
+				button(type='button', class='btn btn-outline-primary', data-toggle='modal' data-target='#settingsModal')
+					i(class='fa fa-wrench', aria-hidden='true')
+		div(class='text-center')
 			div(class='container')
 				h4 POMODORO TIMER
 				h2(id='timer', class='display-1') 25:00
