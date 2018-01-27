@@ -25,11 +25,12 @@
  	$('#reset').click(function() {
 	 	var duration = $('#minutes').val() * 60;
  		resetTimer(duration, display);
- 	})
+ 	});
 
- 	$('#mute').change(function() {
- 		mute = !mute;
- 	})
+ 	$('#save').click(function() {
+ 		mute = $('#mute').is(":checked");
+ 		resetTimer();
+ 	});
 
  	function startTimer(duration, display) {
 
