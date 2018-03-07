@@ -51,6 +51,7 @@
  			if (minutes === "00" && seconds === "00") {
  				clearInterval(interval);
  				playTimerEndSound();
+ 				flashTab();
  				return;
  			}
 
@@ -71,6 +72,19 @@
 		display.text(text);
 		document.title = "(" + text + ") work timer";
  	};
+
+ 	function flashTab() {
+ 		var on = false;
+ 		window.setInterval(function () { on = !on; flashTabText(on) }, 1000);
+ 	}
+
+ 	function flashTabText(on) {
+ 		if (on) {
+ 			document.title = "Times up!";
+ 		} else {
+ 			document.title = "work timer";
+ 		}
+ 	}
 
  	function stopTimer() {
  		updateClockText("00:00");
