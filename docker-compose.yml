@@ -1,0 +1,7 @@
+version: '3'
+services:
+  server:
+    container_name: work-timer
+    image: work-timer
+    ports:
+      - 8080:8080
