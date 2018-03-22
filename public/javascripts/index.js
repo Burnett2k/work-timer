@@ -36,6 +36,7 @@
 
  	$('#stop').click(function() {
  		stopTimer();
+ 		clearInterval(interval);
  		updatePlayButtontext();
  	});
 
@@ -103,7 +104,7 @@
 
  	function flashTab() {
  		var on = false;
- 		window.setInterval(function () { on = !on; flashTabText(on) }, 1000);
+ 		interval = setInterval(function () { on = !on; flashTabText(on) }, 1000);
  	}
 
  	function flashTabText(on) {
