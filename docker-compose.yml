@@ -4,4 +4,4 @@ services:
     container_name: work-timer
     image: work-timer
     ports:
-      - 8080:80
+      - 80:8080
