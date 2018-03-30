@@ -29,11 +29,13 @@ html
 				div(class='modal-content')
 					div(class='modal-header')
 						h4(class='modal-title') Settings
-					div(class='modal-body text-center')
-						form(class='form-inline')
-							label(for='minutes', class='col-form-label col-2') minutes
-							input#minutes(type='number', class='form-control col-2' name='minutes', min='1', max='30', value='25')
-							div(class='form-check col-6')
+					div(class='modal-body')
+						form
+							div(class='form-group row')
+								label(for='minutes', class='col-form-label col-3') minutes
+								div(class='col-4')
+									input#minutes(type='number', class='form-control' name='minutes', min='1', max='30', value='25')
+							div(class='form-check')
 								input(id='mute', class='form-check-input', type='checkbox', checked)
 								label(for='mute', class='form-check-label') mute?
 					div(class='modal-footer')
