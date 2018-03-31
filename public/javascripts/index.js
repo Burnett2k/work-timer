@@ -1,21 +1,31 @@
  $(document).ready(function() {
 
  	var interval;
-	var display = $('#timer');
-	var title = $('#title');
-	var tick = document.getElementById("tick");
-	var timesUp = document.getElementById("timesUp");
-	var timerRunning = false;
+	var timerRunning;
 	var secondsRemaining;
 	var minutesPreference;
 	var mutePreference;
 
+ 	//variables to store UI controls
+	var display = $('#timer');
+	var startButton = $('#start');
+	var stopButton = $('#stop');
+	var resetButton = $('#reset');
+	var saveButton = $('#save');
+	var minutesTextBox = $('#minutes');
+	var muteCheckBox = $('#mute');
+	var tick = document.getElementById("tick");
+	var timesUp = document.getElementById("timesUp");
+	//
+
+	//timer initialization
 	getPreferences();
+	//end initialization
 
 	/*
 		BUTTON EVENTS
 	*/
- 	$('#start').click(function() {
+ 	startButton.click(function() {
 
  		if (timerRunning) {
  			clearInterval(interval);
@@ -26,7 +36,7 @@
  			if (secondsRemaining > 0) {
  				duration = secondsRemaining;
  			} else {
-				duration = $('#minutes').val() * 60;
+				duration = minutesTextBox.val() * 60;
  			}
 
 		 	startTimer(duration, display);
@@ -36,25 +46,26 @@
  		updatePlayButtontext();
  	});
 
- 	$('#stop').click(function() {
+ 	stopButton.click(function() {
  		stopTimer();
  		clearInterval(interval);
  		updatePlayButtontext();
  	});
 
- 	$('#reset').click(function() {
-	 	var duration = $('#minutes').val() * 60;
+ 	resetButton.click(function() {
+	 	var duration = minutesTextBox.val() * 60;
  		resetTimer(duration, display);
  		updatePlayButtontext();
  	});
 
- 	$('#save').click(function() {
- 		mutePreference = $('#mute').is(":checked");
- 		minutesPreference = $('#minutes').val();
+ 	saveButton.click(function() {
+ 		mutePreference = muteCheckBox.is(":checked");
+ 		minutesPreference = minutesTextBox.val();
  		resetTimer();
  		savePreferences();
  	});
 
+ 	//timer methods
  	function startTimer(duration, display) {
 
  		var start = Date.now()
@@ -93,32 +104,6 @@
 
  	};
 
- 	function updateClockText(text) {
-		display.text(text);
-		document.title = "(" + text + ") work timer";
- 	};
-
- 	function updatePlayButtontext() {
- 		if (timerRunning) {
-	 		$('#start').text('pause');
-	 	} else {
-	 		$('#start').text('start');
-	 	}
- 	}
-
- 	function flashTab() {
- 		var on = false;
- 		interval = setInterval(function () { on = !on; flashTabText(on) }, 1000);
- 	}
-
- 	function flashTabText(on) {
- 		if (on) {
- 			document.title = "Times up!";
- 		} else {
- 			document.title = "work timer";
- 		}
- 	}
-
  	function stopTimer() {
  		timerRunning = false;
  		updateClockText("00:00");
@@ -135,26 +120,41 @@
  		updateClockText(minutesPreference + ":00");
  	};
 
- 	function playTimerEndSound() {
- 		if (!mutePreference) {
- 			timesUp.play();
- 		}
- 	};
- 	
- 	function playTimerTickSound() {
- 		if (!mutePreference) {
-	 		tick.play();
- 		}
+ 	//updating the UI
+ 	function updateClockText(text) {
+		display.text(text);
+		document.title = "(" + text + ") work timer";
  	};
 
+ 	function updatePlayButtontext() {
+ 		if (timerRunning) {
+	 		startButton.text('pause');
+	 	} else {
+	 		startButton.text('start');
+	 	}
+ 	}
+
+ 	function flashTab() {
+ 		var on = false;
+ 		interval = setInterval(function () { on = !on; flashTabText(on) }, 1000);
+ 	}
+
+ 	function flashTabText(on) {
+ 		if (on) {
+ 			document.title = "Times up!";
+ 		} else {
+ 			document.title = "work timer";
+ 		}
+ 	}
+
+ 	//local storage
  	function savePreferences() {
  		localStorage.setItem("minutes", minutesPreference);
  		localStorage.setItem("mute", mutePreference);
  	};
 
  	function getPreferences() {
-
-
+ 		//todo this could be factored to a single method that checks if the local storage exists
  		minutesPreference = localStorage.getItem("minutes");
  		//set default if a preference cannot be found
  		if (!minutesPreference) { minutesPreference = '25'; }
@@ -171,8 +171,25 @@
 
  	function updateUIWithPreferences() {
  		updateClockText(minutesPreference + ":00");
- 		$('#minutes').val(minutesPreference);
- 		$('#mute').prop('checked', mutePreference);
+ 		minutesTextBox.val(minutesPreference);
+ 		muteCheckBox.prop('checked', mutePreference);
  	}
+
+ 	//sounds
+ 	function playTimerEndSound() {
+ 		//todo this could be refactored into a single method
+ 		if (!mutePreference) {
+ 			timesUp.play();
+ 		}
+ 	};
+ 	
+ 	function playTimerTickSound() {
+ 		if (!mutePreference) {
+	 		tick.play();
+ 		}
+ 	};
+
+
+
 
  });
