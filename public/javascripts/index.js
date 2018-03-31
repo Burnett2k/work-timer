@@ -5,10 +5,12 @@
 	var title = $('#title');
 	var tick = document.getElementById("tick");
 	var timesUp = document.getElementById("timesUp");
-	var mute = true;
 	var timerRunning = false;
 	var secondsRemaining;
+	var minutesPreference;
+	var mutePreference;
 
+	getPreferences();
 
 	/*
 		BUTTON EVENTS
@@ -47,8 +49,10 @@
  	});
 
  	$('#save').click(function() {
- 		mute = $('#mute').is(":checked");
+ 		mutePreference = $('#mute').is(":checked");
+ 		minutesPreference = $('#minutes').val();
  		resetTimer();
+ 		savePreferences();
  	});
 
  	function startTimer(duration, display) {
@@ -124,22 +128,51 @@
  		}
  	};
 
- 	function resetTimer(duration, display) {
+ 	function resetTimer() {
  		timerRunning = false;
  		secondsRemaining = 0;
  		clearInterval(interval);
- 		updateClockText($('#minutes').val() + ":00");
+ 		updateClockText(minutesPreference + ":00");
  	};
 
  	function playTimerEndSound() {
- 		if (!mute) {
+ 		if (!mutePreference) {
  			timesUp.play();
  		}
  	};
  	
  	function playTimerTickSound() {
- 		if (!mute) {
+ 		if (!mutePreference) {
 	 		tick.play();
  		}
  	};
+
+ 	function savePreferences() {
+ 		localStorage.setItem("minutes", minutesPreference);
+ 		localStorage.setItem("mute", mutePreference);
+ 	};
+
+ 	function getPreferences() {
+
+
+ 		minutesPreference = localStorage.getItem("minutes");
+ 		//set default if a preference cannot be found
+ 		if (!minutesPreference) { minutesPreference = '25'; }
+ 		if (!localStorage.getItem("mute")) { 
+ 			//set default if a preference cannot be found
+ 			mutePreference = true; 
+ 		} else {
+ 			//local storage only allows strings so compare to 'true'
+ 			mutePreference = localStorage.getItem("mute") == 'true';	
+ 		}
+ 		
+ 		updateUIWithPreferences();
+ 	};
+
+ 	function updateUIWithPreferences() {
+ 		updateClockText(minutesPreference + ":00");
+ 		$('#minutes').val(minutesPreference);
+ 		$('#mute').prop('checked', mutePreference);
+ 	}
+
  });
