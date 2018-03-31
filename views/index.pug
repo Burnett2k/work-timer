@@ -11,19 +11,19 @@ html
 				button(type='button', class='btn btn-outline-primary', data-toggle='modal' data-target='#settingsModal')
 					i(class='fa fa-wrench', aria-hidden='true')
 		br
-		div(class='text-center')
-			div(class='container')
+		div(class='container')
+			div(class='text-center')
 				h4 POMODORO TIMER
 				h2(id='timer', class='display-1') 25:00
-				button(id='start', class='btn btn-lg btn-primary col-xs-4', type='button') start
+				button(id='start', class='btn btn-lg btn-primary col-md-2', type='button') start
 				| &nbsp;
-				button(id='stop', class='btn btn-lg btn-primary col-xs-4', type='button') stop
+				button(id='stop', class='btn btn-lg btn-primary col-md-2', type='button') stop
 				| &nbsp;
-				button(id='reset', class='btn btn-lg btn-primary col-xs-4') reset
-			audio#tick
-				source(src='/sounds/tick.mp3')
-			audio#timesUp
-				source(src='/sounds/timesup.mp3')
+				button(id='reset', class='btn btn-lg btn-primary col-md-2', type='button') reset
+		audio#tick
+			source(src='/sounds/tick.mp3')
+		audio#timesUp
+			source(src='/sounds/timesup.mp3')
 		div(class='modal fade', id='settingsModal')
 			div(class='modal-dialog')
 				div(class='modal-content')
