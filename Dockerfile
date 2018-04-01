@@ -14,4 +14,4 @@ COPY public/ ./public
 RUN npm install
 
 # Start the node server
-CMD ["node", "./server.js"]
+CMD ["forever", "./server.js"]
