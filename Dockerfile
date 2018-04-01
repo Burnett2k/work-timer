@@ -12,6 +12,7 @@ COPY public/ ./public
 
 # Install NPM packages
 RUN npm install
+RUN npm install -g forever
 
 # Start the node server
 CMD ["forever", "./server.js"]
