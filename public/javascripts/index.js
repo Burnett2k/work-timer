@@ -2,6 +2,7 @@
 
  	var interval;
 	var timerRunning;
+	var timerPaused;
 	var secondsRemaining;
 	var minutesPreference;
 	var mutePreference;
@@ -16,6 +17,7 @@
 	var muteCheckBox = $('#mute');
 	var tick = document.getElementById("tick");
 	var timesUp = document.getElementById("timesUp");
+
 	//
 
 	//timer initialization
@@ -28,9 +30,12 @@
  	startButton.click(function() {
 
  		if (timerRunning) {
+ 			//hitting 'pause' button
  			clearInterval(interval);
  			timerRunning = false;
+ 			timerPaused = true;
  		} else {
+			//hitting 'start' or 'resume' button
  			var duration;
 
  			if (secondsRemaining > 0) {
@@ -41,6 +46,7 @@
 
 		 	startTimer(duration, display);
 		 	timerRunning = true;
+		 	timerPaused = false;
  		}
 
  		updatePlayButtontext();
@@ -106,8 +112,10 @@
 
  	function stopTimer() {
  		timerRunning = false;
+ 		timerPaused = false;
  		updateClockText("00:00");
  		secondsRemaining = 0;
+ 		updatePlayButtontext();
  		if (interval) {
  			clearInterval(interval);
  		}
@@ -115,8 +123,10 @@
 
  	function resetTimer() {
  		timerRunning = false;
+ 		timerPaused = false;
  		secondsRemaining = 0;
  		clearInterval(interval);
+ 		updatePlayButtontext();
  		updateClockText(minutesPreference + ":00");
  	};
 
@@ -127,10 +137,14 @@
  	};
 
  	function updatePlayButtontext() {
+
+ 		//if timer is running
  		if (timerRunning) {
 	 		startButton.text('pause');
+	 	} else if (timerPaused) {
+	 		startButton.text('resume');
 	 	} else {
-	 		startButton.text('start');
+	 		startButton.text('start')
 	 	}
  	}
 
