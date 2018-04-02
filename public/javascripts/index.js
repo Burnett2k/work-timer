@@ -13,12 +13,12 @@
 	var stopButton = $('#stop');
 	var resetButton = $('#reset');
 	var saveButton = $('#save');
+	var preferencesButton = $('#preferences')
 	var minutesTextBox = $('#minutes');
 	var muteCheckBox = $('#mute');
 	var tick = document.getElementById("tick");
 	var timesUp = document.getElementById("timesUp");
 
-	//
 
 	//timer initialization
 	getPreferences();
@@ -70,6 +70,31 @@
  		resetTimer();
  		savePreferences();
  	});
+
+ 	/*
+ 		KEYBOARD EVENTS
+	*/
+	$(document).keypress(function(e) {
+		
+		switch (e.which) {
+			case 32:
+				//space
+				startButton.trigger('click');
+				break;
+			case 112:
+				//p
+				preferencesButton.trigger('click');
+				break;
+			case 114:
+				//r
+				resetButton.trigger('click');
+				break;
+			case 115:
+				//s
+				stopButton.trigger('click');
+				break;
+		}
+	});
 
  	//timer methods
  	function startTimer(duration, display) {
