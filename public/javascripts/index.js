@@ -6,6 +6,7 @@
 	var secondsRemaining;
 	var minutesPreference;
 	var mutePreference;
+	var historyPreference;
 
  	//variables to store UI controls
 	var display = $('#timer');
@@ -15,6 +16,7 @@
 	var saveButton = $('#save');
 	var minutesTextBox = $('#minutes');
 	var muteCheckBox = $('#mute');
+	var historyCheckBox = $('#history')
 	var tick = document.getElementById("tick");
 	var timesUp = document.getElementById("timesUp");
 
@@ -65,8 +67,10 @@
  	});
 
  	saveButton.click(function() {
- 		mutePreference = muteCheckBox.is(":checked");
  		minutesPreference = minutesTextBox.val();
+ 		mutePreference = muteCheckBox.is(":checked");
+ 		historyPreference = historyCheckBox.is(":checked");
+
  		resetTimer();
  		savePreferences();
  	});
@@ -165,6 +169,7 @@
  	function savePreferences() {
  		localStorage.setItem("minutes", minutesPreference);
  		localStorage.setItem("mute", mutePreference);
+ 		localStorage.setItem("history", historyPreference);
  	};
 
  	function getPreferences() {
@@ -179,6 +184,15 @@
  			//local storage only allows strings so compare to 'true'
  			mutePreference = localStorage.getItem("mute") == 'true';	
  		}
+
+ 		if (!localStorage.getItem("history")) { 
+ 			//set default if a preference cannot be found
+ 			historyPreference = false; 
+ 		} else {
+ 			//local storage only allows strings so compare to 'true'
+ 			historyPreference = localStorage.getItem("history") == 'true';	
+ 		}
+ 		
  		
  		updateUIWithPreferences();
  	};
@@ -187,6 +201,7 @@
  		updateClockText(minutesPreference + ":00");
  		minutesTextBox.val(minutesPreference);
  		muteCheckBox.prop('checked', mutePreference);
+ 		historyCheckBox.prop('checked', historyPreference);
  	}
 
  	//sounds
