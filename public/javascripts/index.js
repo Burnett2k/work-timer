@@ -54,7 +54,6 @@
 
  	stopButton.click(function() {
  		stopTimer();
- 		clearInterval(interval);
  		updatePlayButtontext();
  	});
 
@@ -140,6 +139,7 @@
  		timerPaused = false;
  		updateClockText("00:00");
  		secondsRemaining = 0;
+ 		pauseSound();
  		updatePlayButtontext();
  		if (interval) {
  			clearInterval(interval);
@@ -150,6 +150,7 @@
  		timerRunning = false;
  		timerPaused = false;
  		secondsRemaining = 0;
+ 		pauseSound();
  		clearInterval(interval);
  		updatePlayButtontext();
  		updateClockText(minutesPreference + ":00");
@@ -227,6 +228,12 @@
 	 		tick.play();
  		}
  	};
+
+ 	function pauseSound() {
+ 		if (!mutePreference) {
+ 			timesUp.pause();
+ 		}
+ 	}
 
 
 
