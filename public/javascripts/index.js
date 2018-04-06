@@ -6,6 +6,7 @@
 	var secondsRemaining;
 	var minutesPreference;
 	var mutePreference;
+	var sessionsCompleted;
 
  	//variables to store UI controls
 	var display = $('#timer');
@@ -16,12 +17,15 @@
 	var preferencesButton = $('#preferences')
 	var minutesTextBox = $('#minutes');
 	var muteCheckBox = $('#mute');
+	var sessionsCompletedBadge = $('#sessionsCompleted');
 	var tick = document.getElementById("tick");
 	var timesUp = document.getElementById("timesUp");
 
 
 	//timer initialization
 	getPreferences();
+	getSessionsCompleted();
+	updateUIWithLocalStorage();
 	//end initialization
 
 	/*
@@ -118,10 +122,9 @@
  				clearInterval(interval);
  				playTimerEndSound();
  				flashTab();
+ 				incrementSessionsCompleted();
  				return;
  			}
-
- 			playTimerTickSound();
 
  			if (diff <= 0) {
  				start = Date.now() + 1000;
@@ -205,14 +208,35 @@
  			//local storage only allows strings so compare to 'true'
  			mutePreference = localStorage.getItem("mute") == 'true';	
  		}
- 		
- 		updateUIWithPreferences();
  	};
 
- 	function updateUIWithPreferences() {
+ 	function getSessionsCompleted() {
+ 		sessionsCompleted = localStorage.getItem(getCurrentDate());
+
+ 		if (!sessionsCompleted) {
+ 			sessionsCompleted = 0;
+ 		}
+ 	}
+
+ 	function incrementSessionsCompleted() {
+ 		sessionsCompleted += 1;
+ 		localStorage.setItem(getCurrentDate(), sessionsCompleted);
+ 		sessionsCompleted.text(sessionsCompleted);
+ 	}
+
+ 	function updateUIWithLocalStorage() {
  		updateClockText(minutesPreference + ":00");
  		minutesTextBox.val(minutesPreference);
  		muteCheckBox.prop('checked', mutePreference);
+		sessionsCompletedBadge.text(sessionsCompleted);
+ 	}
+
+ 	function getCurrentDate() {
+		var currentDate = new Date();
+		var day = currentDate.getDate().toString();
+		var month = (currentDate.getMonth() + 1).toString();
+		var year = currentDate.getFullYear().toString();
+		return month + "/" + day + "/" + year;
  	}
 
  	//sounds
@@ -222,20 +246,11 @@
  			timesUp.play();
  		}
  	};
- 	
- 	function playTimerTickSound() {
- 		if (!mutePreference) {
-	 		tick.play();
- 		}
- 	};
 
  	function pauseSound() {
  		if (!mutePreference) {
  			timesUp.pause();
  		}
  	}
-
-
-
 
  });
