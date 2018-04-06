@@ -80,8 +80,8 @@
 	$(document).keypress(function(e) {
 		
 		switch (e.which) {
-			case 32:
-				//space
+			case 102:
+				//f
 				startButton.trigger('click');
 				break;
 			case 112:
@@ -211,8 +211,7 @@
  	};
 
  	function getSessionsCompleted() {
- 		sessionsCompleted = localStorage.getItem(getCurrentDate());
-
+ 		sessionsCompleted = parseInt(localStorage.getItem(getCurrentDate()), 10);
  		if (!sessionsCompleted) {
  			sessionsCompleted = 0;
  		}
@@ -221,7 +220,7 @@
  	function incrementSessionsCompleted() {
  		sessionsCompleted += 1;
  		localStorage.setItem(getCurrentDate(), sessionsCompleted);
- 		sessionsCompleted.text(sessionsCompleted);
+ 		sessionsCompletedBadge.text(sessionsCompleted);
  	}
 
  	function updateUIWithLocalStorage() {
