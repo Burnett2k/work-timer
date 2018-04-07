@@ -1,0 +1,20 @@
+@import "../libs/bootstrap/scss/_variables.scss";
+@import "../libs/bootstrap/scss/_functions.scss";
+@import "../libs/bootstrap/scss/mixins/_breakpoints.scss";
+
+.top-buffer {
+	margin-top: 20px;
+} 
+
+@media (min-width: 992px) { 
+	.top-buffer {
+		margin-top: 40px;
+	}
+}
+
+
+@media (min-width: 1200px) { 
+	.top-buffer {
+		margin-top: 40px;
+	}	
+}
