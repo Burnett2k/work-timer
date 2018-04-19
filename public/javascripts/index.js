@@ -218,6 +218,7 @@
  	}
 
  	function incrementSessionsCompleted() {
+ 		getSessionsCompleted();
  		sessionsCompleted += 1;
  		localStorage.setItem(getCurrentDate(), sessionsCompleted);
  		sessionsCompletedBadge.text(sessionsCompleted);
