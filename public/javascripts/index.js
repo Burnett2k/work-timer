@@ -18,8 +18,8 @@
 	var minutesTextBox = $('#minutes');
 	var muteCheckBox = $('#mute');
 	var sessionsCompletedBadge = $('#sessionsCompleted');
-	var tick = document.getElementById("tick");
 	var timesUp = document.getElementById("timesUp");
+	var timesUpSrc = '/sounds/timesup.mp3';
 
 
 	//timer initialization
@@ -243,14 +243,16 @@
  	function playTimerEndSound() {
  		//todo this could be refactored into a single method
  		if (!mutePreference) {
+ 			timesUp.src = timesUpSrc;
  			timesUp.play();
  		}
  	};
 
  	function pauseSound() {
  		if (!mutePreference) {
+ 			timesUp.currentTime = 0;
+ 			timesUp.src = '';
  			timesUp.pause();
  		}
  	}
-
  });
