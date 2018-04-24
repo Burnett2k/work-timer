@@ -13,8 +13,6 @@ COPY public/ ./public
 # Install NPM packages
 RUN npm install
 RUN npm install -g forever
-RUN npm install -g bower
-RUN bower install
 
 # Start the node server
 CMD ["forever", "./server.js"]
