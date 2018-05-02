@@ -36,27 +36,27 @@ html
 			source(src='/sounds/timesup.mp3')
 		div(class='modal fade', id='settingsModal')
 			div(class='modal-dialog')
-				div(class='modal-content')
-					div(class='modal-header')
-						h4(class='modal-title') Settings
-					div(class='modal-body')
-						form
-							div(class='form-group row')
-								label(for='minutes', class='col-form-label col-3') minutes
-								div(class='col-4')
-									input#minutes(type='number', class='form-control' name='minutes', min='1', max='30', value='25')
-							div(class='form-check')
-								input(id='mute', class='form-check-input', type='checkbox', checked)
-								label(for='mute', class='form-check-label') mute?
-							div(class='d-none d-sm-block d-md-block')
-								hr
-								h4 Keyboard shortcuts
-								p Start / Pause = F
-								p Stop          = S
-								p Reset         = R
-								p Preferences   = P
-					div(class='modal-footer')
-						button#save(type='button', class='btn btn-primary', data-dismiss='modal') Save
+				form
+					div(class='modal-content')
+						div(class='modal-header')
+							h4(class='modal-title') Settings
+						div(class='modal-body')
+								div(class='form-group row')
+									label(for='minutes', class='col-form-label col-4') minutes (1-30)
+									div(class='col-4')
+										input#minutes(type='number', class='form-control' name='minutes', min='1', max='30', value='25')
+								div(class='form-check')
+									input(id='mute', class='form-check-input', type='checkbox', checked)
+									label(for='mute', class='form-check-label') mute?
+								div(class='d-none d-sm-block d-md-block')
+									hr
+									h4 Keyboard shortcuts
+									p Start / Pause = F
+									p Stop          = S
+									p Reset         = R
+									p Preferences   = P
+						div(class='modal-footer')
+							button#save(type='button', class='btn btn-primary') Save
 		footer(class='fixed-bottom text-center bg-dark text-light') 
 			div(class='container') Created by Sawyer Burnett
 				br

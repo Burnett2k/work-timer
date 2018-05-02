@@ -68,10 +68,22 @@
  	});
 
  	saveButton.click(function() {
- 		mutePreference = muteCheckBox.is(":checked");
- 		minutesPreference = minutesTextBox.val();
- 		resetTimer();
- 		savePreferences();
+
+ 		var minutes = parseInt(minutesTextBox.val());
+		
+
+
+ 		if (isNaN(minutes) || minutes < 1 || minutes > 30) {
+ 			minutesTextBox.addClass('error');
+ 		} else {
+ 			minutesTextBox.removeClass('error');
+			mutePreference = muteCheckBox.is(":checked");
+		 	minutesPreference = minutesTextBox.val();
+		 	resetTimer();
+		 	savePreferences();
+		 	$('#settingsModal').modal('hide');
+ 		}
+ 		return;
  	});
 
  	/*
