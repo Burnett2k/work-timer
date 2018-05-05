@@ -25,7 +25,7 @@
 	//timer initialization
 	getPreferences();
 	getSessionsCompleted();
-	updateUIWithLocalStorage();
+	updateUIWithPreferences();
 	//end initialization
 
 	/*
@@ -70,8 +70,6 @@
  	saveButton.click(function() {
 
  		var minutes = parseInt(minutesTextBox.val());
-		
-
 
  		if (isNaN(minutes) || minutes < 1 || minutes > 30) {
  			minutesTextBox.addClass('error');
@@ -83,7 +81,6 @@
 		 	savePreferences();
 		 	$('#settingsModal').modal('hide');
  		}
- 		return;
  	});
 
  	/*
@@ -111,14 +108,15 @@
 		}
 	});
 
- 	//timer methods
+	/*
+ 		TIMER METHODS
+ 	*/
  	function startTimer(duration, display) {
 
  		var start = Date.now()
  		var diff;
  		var minutes;
  		var seconds;
-
 
  		function timer() {
  			diff = duration - (((Date.now() - start) / 1000) | 0);
@@ -141,12 +139,10 @@
  			if (diff <= 0) {
  				start = Date.now() + 1000;
  			}
-
  		};
 
  		timer();
 		interval = setInterval(timer, 1000); 		
-
  	};
 
  	function stopTimer() {
@@ -179,7 +175,6 @@
 
  	function updatePlayButtontext() {
 
- 		//if timer is running
  		if (timerRunning) {
 	 		startButton.text('pause');
 	 	} else if (timerPaused) {
@@ -187,7 +182,7 @@
 	 	} else {
 	 		startButton.text('start')
 	 	}
- 	}
+ 	};
 
  	function flashTab() {
  		var on = false;
@@ -200,7 +195,7 @@
  		} else {
  			document.title = "work timer";
  		}
- 	}
+ 	};
 
  	//local storage
  	function savePreferences() {
@@ -227,21 +222,21 @@
  		if (!sessionsCompleted) {
  			sessionsCompleted = 0;
  		}
- 	}
+ 	};
 
  	function incrementSessionsCompleted() {
  		getSessionsCompleted();
  		sessionsCompleted += 1;
  		localStorage.setItem(getCurrentDate(), sessionsCompleted);
  		sessionsCompletedBadge.text(sessionsCompleted);
- 	}
+ 	};
 
- 	function updateUIWithLocalStorage() {
+ 	function updateUIWithPreferences() {
  		updateClockText(minutesPreference + ":00");
  		minutesTextBox.val(minutesPreference);
  		muteCheckBox.prop('checked', mutePreference);
 		sessionsCompletedBadge.text(sessionsCompleted);
- 	}
+ 	};
 
  	function getCurrentDate() {
 		var currentDate = new Date();
@@ -249,11 +244,10 @@
 		var month = (currentDate.getMonth() + 1).toString();
 		var year = currentDate.getFullYear().toString();
 		return month + "/" + day + "/" + year;
- 	}
+ 	};
 
  	//sounds
  	function playTimerEndSound() {
- 		//todo this could be refactored into a single method
  		if (!mutePreference) {
  			timesUp.src = timesUpSrc;
  			timesUp.play();
@@ -266,5 +260,5 @@
  			timesUp.src = '';
  			timesUp.pause();
  		}
- 	}
+ 	};
  });
