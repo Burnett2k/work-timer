@@ -18,6 +18,7 @@
 	var preferencesButton = $('#preferences')
 	var minutesTextBox = $('#minutes');
 	var muteCheckBox = $('#mute');
+	var settingsModal = $('#settingsModal');
 	var sessionsCompletedBadge = $('#sessionsCompleted');
 	var timesUp = document.getElementById("timesUp");
 	var timesUpSrc = '/sounds/timesup.mp3';
@@ -80,7 +81,7 @@
 		 	minutesPreference = minutesTextBox.val();
 		 	resetTimer();
 		 	savePreferences();
-		 	$('#settingsModal').modal('hide');
+		 	settingsModal.modal('hide');
  		}
  	});
 
@@ -90,13 +91,18 @@
 	$(document).keypress(function(e) {
 		
 		switch (e.which) {
+			case 13:
+				//enter
+				if (settingsModal.is(':visible')) {
+					saveButton.trigger('click');
+				}
 			case 102:
 				//f
 				startButton.trigger('click');
 				break;
 			case 112:
 				//p
-				preferencesButton.trigger('click');
+				$('#settingsModal').modal('toggle');
 				break;
 			case 114:
 				//r
@@ -108,6 +114,13 @@
 				break;
 		}
 	});
+
+	/*
+		MODAL EVENTS
+	*/
+	$('#settingsModal').on('shown.bs.modal', function (e) {
+		minutesTextBox.focus();
+	})
 
 	/*
  		TIMER METHODS
