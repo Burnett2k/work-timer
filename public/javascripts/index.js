@@ -1,3 +1,5 @@
+ // 7-4-2018 release
+
  $(document).ready(function() {
 	'use strict';
 
