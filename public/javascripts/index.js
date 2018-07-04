@@ -95,9 +95,11 @@
 		switch (e.which) {
 			case 13:
 				//enter
+				e.preventDefault();
 				if (settingsModal.is(':visible')) {
 					saveButton.trigger('click');
 				}
+				break;
 			case 102:
 				//f
 				startButton.trigger('click');
